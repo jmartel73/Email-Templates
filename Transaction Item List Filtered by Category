@@ -1,0 +1,54 @@
+<#-- FM:BEGIN -->
+<#if transaction?? && transaction.item?has_content>
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 20%;"><b>Sales Order #:</b></td>
+    <td style="width: 80%;">${transaction.tranid}</td>
+  </tr>
+  <tr>
+    <td style="width: 20%;"><b>Event Name:</b></td>
+    <td style="width: 80%;">${transaction.custbody_show_table}</td>
+  </tr>
+  <tr>
+    <td style="width: 20%;"><b>Event Address:</b></td>
+    <td style="width: 80%;">${transaction.custbody_show_table.custrecord_facility_address}</td>
+  </tr>
+  <tr>
+    <td style="width: 20%;"><b>Event Dates:</b></td>
+    <td style="width: 80%;">${transaction.custbody_show_table.custrecord_ng_cses_event_start_date}-${transaction.custbody_show_table.custrecord_ng_cses_event_end_date}</td>
+  </tr>
+</table>
+
+  <br />
+  
+<table style="border-collapse: collapse; width: 612pt; border-width: 1px;" border="1" width="612pt">
+<#if transaction.item?? && transaction.item?size gt 0>
+    <#list transaction.item as item>
+            <#if item_index == 0>
+                <thead>
+                    <tr>
+                        <th style="border-width: 1px;" colspan="3" align="center">${item.quantity@label}</th>
+                        <th style="border-width: 1px;" colspan="13">${item.item@label}</th>
+                    </tr>
+                </thead>
+            </#if>
+            <tbody>
+              <#if item.custcol_itemcategory = "Specialty Furniture">
+                <tr>
+                    <td style="line-height: 150%; border-width: 1px;" colspan="3" align="center">${item.quantity}</td>
+                    <td style="border-width: 1px;" colspan="13"><span class="itemname">${item.item}</span></td>
+                </tr>
+            </tbody>
+        </#if>
+    </#list>
+</#if>
+
+
+
+
+
+
+</tbody>
+</table>
+<hr /></#if>
+<#-- FM:END -->
