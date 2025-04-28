@@ -1,0 +1,34 @@
+<p>Please see the items below:</p>
+
+
+<#-- FM:BEGIN -->
+<#if transaction?? && transaction.item?has_content>
+    <table class="itemtable">
+        <#list transaction.item as item>
+            <#if item_index == 0>
+                <thead>
+                    <tr>
+                        <th align="center" colspan="3">${item.quantity@label}</th>
+                        <th colspan="13">${item.item@label}</th>
+                        <th align="right" colspan="3">${item.rate@label}</th>
+                        <th align="right" colspan="2">Taxable?</th>
+                        <th align="right" colspan="3">${item.amount@label}</th>
+                    </tr>
+                </thead>
+            </#if>
+            <tr>
+                <td align="center" colspan="3" style="line-height:150%;">${item.quantity}</td>
+                <td colspan="13"><span class="itemname">${item.item}</span><br />${item.description}</td>
+                <td align="right" colspan="3">${item.rate}</td>
+                <td align="right" colspan="2">
+                    <#if item.istaxable??>
+                        <#if item.istaxable == true>Yes<#else>No</#if>
+                    </#if>
+                </td>
+                <td align="right" colspan="3">${item.amount}</td>
+            </tr>
+        </#list>
+    </table>
+    <hr />
+</#if>
+<#-- FM:END -->
